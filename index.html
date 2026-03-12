@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8" />
+    <title>Gestion de budget - Mini Finary</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <!-- Lien vers le CSS -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <main class="app" aria-label="Application de gestion de budget">
+        <header>
+            <section class="bouton-header">
+            <h1>Gestion de budget</h1>
+            <p>bouton prem</p>
+            </section>
+            <p>Ajoute tes dépenses, visualise ton historique et vois où part ton argent.</p>
+        </header>
+
+        <section class="grid" aria-label="Tableau de bord">
+            <!-- ========== COLONNE GAUCHE : FORM + GRAPHIQUE ========== -->
+            <article class="card" aria-label="Ajout de dépense">
+                <div class="card-header">
+                    <h2 id="cardtitle">Nouvelle dépense</h2>
+                    <span class="badge" id="modeBadge">Mode : ajout</span>
+                </div>
+
+                <form id="expenseForm">
+                    <div>
+                        <label for="amount">Montant (€)</label>
+                        <input
+                            type="number"
+                            id="amount"
+                            name="amount"
+                            min="0"
+                            step="0.01"
+                            required
+                            placeholder="ex : 49.99"
+                        />
+                    </div>
+
+                    <div>
+                        <label for="date">Date</label>
+                        <input
+                            type="date"
+                            id="date"
+                            name="date"
+                            required
+                        />
+                    </div>
+
+                    <div class="full-row">
+                        <label for="description">Description</label>
+                        <input
+                            type="text"
+                            id="description"
+                            name="description"
+                            required
+                            placeholder="ex : courses, loyer, abonnement Netflix…"
+                        />
+                    </div>
+
+                    <div>
+                        <label for="category">Catégorie</label>
+                        <select id="category" name="category" required>
+                            <option value="">-- Choisir une catégorie --</option>
+                            <option value="logement">Logement</option>
+                            <option value="alimentation">Alimentation</option>
+                            <option value="transports">Transports</option>
+                            <option value="loisirs">Loisirs</option>
+                            <option value="autres">Autres</option>
+                        </select>
+                    </div>
+
+                    <div class="actions full-row">
+                        <button type="submit" class="primary" id="submitBtn">
+                            💾 <span id="submitLabel">Ajouter la dépense</span>
+                        </button>
+                        <button type="button" class="secondary" id="cancelEditBtn" disabled>
+                            ↩️ Annuler la modification
+                        </button>
+                    </div>
+                </form>
+
+                <section aria-label="Graphique dépenses par catégorie" style="margin-top: 1.1rem;">
+                    <div class="card-header" style="padding: 0;">
+                        <h2 style="margin: 0;">Répartition par catégorie</h2>
+                    </div>
+                    <div id="chart" class="chart-wrapper">
+                        <!-- Barres générées en JS -->
+                    </div>
+                    <div id="chartTotal" class="chart-total"></div>
+                    <div class="chart-legend" aria-label="Légende des catégories">
+                        <div class="legend-item"><span class="legend-dot col-logement"></span> Logement</div>
+                        <div class="legend-item"><span class="legend-dot col-alimentation"></span> Alimentation</div>
+                        <div class="legend-item"><span class="legend-dot col-transports"></span> Transports</div>
+                        <div class="legend-item"><span class="legend-dot col-loisirs"></span> Loisirs</div>
+                        <div class="legend-item"><span class="legend-dot col-autres"></span> Autres</div>
+                    </div>
+                </section>
+            </article>
+
+            <!-- ========== COLONNE DROITE : HISTORIQUE ========== -->
+            <article class="card" aria-label="Historique des dépenses">
+                <div class="card-header">
+                    <h2>Historique des dépenses</h2>
+                    <span class="badge" id="countBadge">0 dépense</span>
+                </div>
+
+                <div class="table-wrapper" id="tableWrapper">
+                    <table aria-describedby="countBadge">
+                        <thead>
+                            <tr>
+                                <th>Date</th>
+                                <th>Description</th>
+                                <th>Catégorie</th>
+                                <th class="amount">Montant</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="expenseTableBody">
+                            <!-- Lignes générées en JS -->
+                        </tbody>
+                    </table>
+                </div>
+                <div id="emptyState" class="empty-state">
+                    Aucune dépense pour le moment. Commence par en ajouter une !
+                </div>
+            </article>
+        </section>
+    </main>
+
+    <!-- Lien vers le JS -->
+    <script src="script.js"></script>
+</body>
+</html>

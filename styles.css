@@ -1,0 +1,290 @@
+/* ========== RESET SIMPLE ========== */
+* {
+    box-sizing: border-box;
+}
+body {
+    margin: 0;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+        Roboto, sans-serif;
+    background: #0f172a;
+    color: #e5e7eb;
+}
+
+/* ========== LAYOUT GLOBAL ========== */
+.app {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 2rem 1rem 3rem;
+}
+
+h1 {
+    font-size: 1.8rem;
+    margin-bottom: 0.25rem;
+}
+h2 {
+    font-size: 1.3rem;
+    margin: 1.5rem 0 0.75rem;
+}
+p {
+    color: #9ca3af;
+    margin-top: 0;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
+    gap: 1.5rem;
+}
+
+@media (max-width: 900px) {
+    .grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* ========== CARDS ========== */
+.card {
+    background: #020617;
+    border-radius: 0.75rem;
+    padding: 1.25rem 1.5rem;
+    border: 1px solid #1f2937;
+    box-shadow: 0 18px 45px rgba(15, 23, 42, 0.75);
+}
+
+.card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 0.75rem;
+}
+
+.badge {
+    font-size: 0.75rem;
+    padding: 0.15rem 0.5rem;
+    border-radius: 999px;
+    border: 1px solid #1f2937;
+    color: #9ca3af;
+}
+
+/* ========== FORMULAIRE ========== */
+form {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.75rem 1rem;
+    margin-top: 0.75rem;
+}
+
+@media (max-width: 600px) {
+    form {
+        grid-template-columns: 1fr;
+    }
+}
+
+label {
+    display: block;
+    font-size: 0.8rem;
+    margin-bottom: 0.2rem;
+    color: #9ca3af;
+}
+
+input, select {
+    width: 100%;
+    padding: 0.5rem 0.6rem;
+    border-radius: 0.5rem;
+    border: 1px solid #1f2937;
+    background: #020617;
+    color: #e5e7eb;
+    font-size: 0.9rem;
+}
+
+input:focus, select:focus {
+    outline: 2px solid #22c55e;
+    outline-offset: 1px;
+    border-color: transparent;
+}
+
+.full-row {
+    grid-column: 1 / -1;
+}
+
+.actions {
+    display: flex;
+    gap: 0.75rem;
+    margin-top: 0.5rem;
+}
+
+button {
+    border-radius: 999px;
+    border: none;
+    font-size: 0.9rem;
+    padding: 0.55rem 1.2rem;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
+    font-weight: 500;
+    transition: transform 0.05s ease, box-shadow 0.05s ease, opacity 0.15s;
+}
+
+button:active {
+    transform: translateY(1px);
+    box-shadow: none;
+}
+
+button.primary {
+    background: linear-gradient(135deg, #22c55e, #16a34a);
+    color: #022c22;
+    box-shadow: 0 12px 24px rgba(34, 197, 94, 0.45);
+}
+
+button.secondary {
+    background: #111827;
+    color: #e5e7eb;
+    border: 1px solid #1f2937;
+}
+
+button.danger {
+    background: #b91c1c;
+    color: #fee2e2;
+}
+
+button:disabled {
+    opacity: 0.4;
+    cursor: default;
+    box-shadow: none;
+}
+
+/* ========== TABLEAU HISTORIQUE ========== */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 0.75rem;
+    font-size: 0.85rem;
+}
+
+thead {
+    background: #020617;
+    position: sticky;
+    top: 0;
+    z-index: 1;
+}
+
+th, td {
+    padding: 0.45rem 0.4rem;
+    text-align: left;
+    border-bottom: 1px solid #111827;
+    white-space: nowrap;
+}
+
+th {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: #6b7280;
+}
+
+tbody tr:hover {
+    background: rgba(15, 23, 42, 0.8);
+}
+
+td.amount {
+    font-variant-numeric: tabular-nums;
+    text-align: right;
+}
+
+td.category-pill span {
+    display: inline-block;
+    padding: 0.15rem 0.5rem;
+    border-radius: 999px;
+    font-size: 0.75rem;
+}
+
+.cat-logement { background: rgba(59, 130, 246, 0.1); color: #93c5fd; }
+.cat-alimentation { background: rgba(34, 197, 94, 0.1); color: #86efac; }
+.cat-transports { background: rgba(249, 115, 22, 0.1); color: #fed7aa; }
+.cat-loisirs { background: rgba(244, 63, 94, 0.1); color: #f9a8d4; }
+.cat-autres { background: rgba(148, 163, 184, 0.1); color: #e5e7eb; }
+
+.table-wrapper {
+    max-height: 350px;
+    overflow: auto;
+}
+
+.empty-state {
+    font-size: 0.9rem;
+    color: #6b7280;
+    padding: 0.75rem 0.1rem;
+}
+
+/* ========== GRAPHIQUE CATEGORIES ========== */
+.chart-wrapper {
+    margin-top: 0.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+}
+
+.chart-row {
+    display: flex;
+    flex-direction: column;
+    gap: 0.15rem;
+}
+
+.chart-row-header {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.8rem;
+    color: #9ca3af;
+}
+
+.chart-bar-bg {
+    width: 100%;
+    height: 0.6rem;
+    border-radius: 999px;
+    background: #020617;
+    overflow: hidden;
+    border: 1px solid #111827;
+}
+
+.chart-bar-fill {
+    height: 100%;
+    border-radius: inherit;
+    transition: width 0.3s ease;
+}
+
+.chart-total {
+    margin-top: 0.5rem;
+    font-size: 0.85rem;
+    color: #9ca3af;
+}
+
+.chart-legend {
+    margin-top: 0.75rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.35rem 0.75rem;
+    font-size: 0.75rem;
+}
+
+.legend-item {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+}
+
+.legend-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 999px;
+}
+
+.bouton-header {
+    display: flex;
+}
+
+/* Couleurs pour le chart */
+.col-logement { background: #3b82f6; }
+.col-alimentation { background: #22c55e; }
+.col-transports { background: #f97316; }
+.col-loisirs { background: #f43f5e; }
+.col-autres { background: #64748b; }
