@@ -16,10 +16,10 @@
                 <div class= "revenue-function">
                     <a type="submit" class="insight-button" href="insight.html">INSIGHT</a>
                 </div>
-                <section class="revenue-button">
-                        <p>Mes Revenues (€)</p>
-                        <textarea>Montant</textarea>
-                        <a type="submit">Modifier</a>
+                <section class="revenue-button" id="revenuButton">
+                        <label for="amountRevenu">Mes Revenues (€)</label>
+                        <input placeholder="Montant" id="amountRevenu" required type="number" min="0" step="0.01"></input>
+                        <button class="montant-button" type="submit">Ajouter</button>
                 </section>
             </section>
         </header>
@@ -79,7 +79,7 @@
                             <option value="loisirs">Loisirs</option>
                             <option value="autres">Autres</option>
                         </select>
-                    </divm
+                    </div>
 
                     <div class="actions full-row">
                         <button type="submit" class="primary" id="submitBtn">
@@ -112,8 +112,12 @@
             <!-- ========== COLONNE DROITE : HISTORIQUE ========== -->
             <article class="card" aria-label="Historique des dépenses">
                 <div class="card-header">
-                    <h2>Historique des dépenses</h2>
-                    <span class="badge" id="countBadge">0 dépense</span>
+                    <h2>Historique</h2>
+                    <section class="vuGlobale">
+                        <p>Restes à vivre</p>
+                        <p>Dépenses total</p>
+                        <p>Revenu</p>
+                    </section>
                 </div>
 
                 <div class="table-wrapper" id="tableWrapper">
@@ -121,6 +125,7 @@
                         <thead>
                             <tr>
                                 <th>Date</th>
+                                <th>Type</th>
                                 <th>Description</th>
                                 <th>Catégorie</th>
                                 <th class="amount">Montant</th>

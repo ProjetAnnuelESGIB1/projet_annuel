@@ -12,7 +12,7 @@ body {
 
 /* ========== LAYOUT GLOBAL ========== */
 .app {
-    max-width: 1100px;
+    max-width: 1300px;
     margin: 0 auto;
     padding: 2rem 1rem 3rem;
 }
@@ -55,7 +55,13 @@ p {
     display: flex;
     justify-content: space-between;
     align-items: baseline;
-    margin-bottom: 0.75rem;
+    margin-bottom: 1.5rem;
+}
+
+.vuGlobale {
+    display:flex;
+    justify-content: space-around;
+    margin:20px;
 }
 
 .badge {
@@ -66,11 +72,15 @@ p {
     color: #9ca3af;
 }
 
-header { 
-    position: sticky; 
-    top: 0; 
-    background: #0f172a;
+
+header {
+  position: sticky;
+  top: 0;
+  z-index: 9999;
+  background: rgba(15, 23, 42, 0.98); /* petit voile opaque */
+  backdrop-filter: blur(4px); /* optionnel, effet stylé */
 }
+
 
 .navbar { 
     display: flex; 
@@ -315,10 +325,33 @@ td.category-pill span {
 }
 
 .revenue-function {
-    ali: middle;
-    gap: 50px;
+    padding-left:370px;
 }
 
+.revenue-button {
+    background-color: #020617;
+    padding: 20px;
+    border-radius: 2rem;
+    text-decoration: none;
+    color: white;
+    border: 1px solid #1f2937;
+    box-shadow: 0 18px 45px rgba(15, 23, 42, 0.75);
+}
+
+.revenue-button label {
+    color: white;
+}
+
+.revenue-button input {
+    width:160px;
+    height:26px;
+}
+
+.revenue-button button {
+    background: linear-gradient(135deg, #22c55e, #16a34a);
+    color: #022c22;
+    box-shadow: 0 12px 24px rgba(34, 197, 94, 0.45);
+}
 
 /* Couleurs pour le chart */
 .col-logement { background: #3b82f6; }
