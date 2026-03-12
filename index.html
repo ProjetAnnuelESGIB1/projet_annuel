@@ -11,12 +11,20 @@
 <body>
     <main class="app" aria-label="Application de gestion de budget">
         <header>
-            <section class="bouton-header">
-            <h1>Gestion de budget</h1>
-            <p>bouton prem</p>
+            <section class="navbar">
+                <h1>Gestion de budget</h1>
+                <div class= "revenue-function">
+                    <a type="submit" class="insight-button" href="insight.html">INSIGHT</a>
+                </div>
+                <section class="revenue-button">
+                        <p>Mes Revenues (€)</p>
+                        <textarea>Montant</textarea>
+                        <a type="submit">Modifier</a>
+                </section>
             </section>
-            <p>Ajoute tes dépenses, visualise ton historique et vois où part ton argent.</p>
         </header>
+
+        <p>Ajoute tes dépenses, visualise ton historique et vois où part ton argent.</p>
 
         <section class="grid" aria-label="Tableau de bord">
             <!-- ========== COLONNE GAUCHE : FORM + GRAPHIQUE ========== -->
@@ -71,7 +79,7 @@
                             <option value="loisirs">Loisirs</option>
                             <option value="autres">Autres</option>
                         </select>
-                    </div>
+                    </divm
 
                     <div class="actions full-row">
                         <button type="submit" class="primary" id="submitBtn">

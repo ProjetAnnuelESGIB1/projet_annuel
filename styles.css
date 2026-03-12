@@ -66,6 +66,20 @@ p {
     color: #9ca3af;
 }
 
+header { 
+    position: sticky; 
+    top: 0; 
+    background: #0f172a;
+}
+
+.navbar { 
+    display: flex; 
+    justify-content: space-between; 
+    align-items: center;
+    padding: 0.5rem 0;
+}
+
+
 /* ========== FORMULAIRE ========== */
 form {
     display: grid;
@@ -278,9 +292,33 @@ td.category-pill span {
     border-radius: 999px;
 }
 
-.bouton-header {
-    display: flex;
+.insight-button {
+    color: white;
+    background-color: #042098;
+    margin-top: 1rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.6rem 1.4rem;
+    border-radius: 2rem;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.95rem;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
 }
+
+.insight-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 16px rgba(0, 35, 192, 0.3);
+    background-color: #001a80;
+}
+
+.revenue-function {
+    ali: middle;
+    gap: 50px;
+}
+
 
 /* Couleurs pour le chart */
 .col-logement { background: #3b82f6; }
