@@ -55,13 +55,22 @@ p {
     display: flex;
     justify-content: space-between;
     align-items: baseline;
-    margin-bottom: 1.5rem;
 }
 
 .vuGlobale {
     display:flex;
     justify-content: space-around;
-    margin:20px;
+}
+
+.vuGlobaleCard {
+    padding:15px;
+    padding-bottom:50px;
+    color: white;
+    background-color: #020617;
+    border-radius: 1.5rem;
+    text-decoration: none;
+    border: 1px solid #1f2937;
+    box-shadow: 0 18px 45px rgba(15, 23, 42, 0.5);
 }
 
 .badge {
