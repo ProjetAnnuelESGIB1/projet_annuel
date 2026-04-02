@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8" />
+    <title>Gestion de budget - Mini Finary</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <!-- Lien vers le CSS -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <main class="app" aria-label="Application de gestion de budget">
+        <header>
+            <section class="navbar">
+                <h1>Gestion de budget</h1>               
+                <div class="revenue-function">
+                  <a class="insight-button" href="insight.html">INSIGHT</a>
+
+                  <!-- Bouton reset -->
+                  <button type="button" class="reset-button" id="resetDataBtn" title="Supprimer toutes les données">
+                    RESET
+                  </button>
+                </div>
+                <section class="revenue-button" id="revenuButton">
+                        <label for="amountRevenu">Mes Revenues (€)</label>
+                        <input placeholder="Montant" id="amountRevenu" required type="number" min="0" step="0.01"></input>
+                        <button class="montant-button" type="submit">Ajouter</button>
+                </section>
+            </section>
+        </header>
+
+        <p>Ajoute tes dépenses, visualise ton historique et vois où part ton argent.</p>
+
+        <section class="grid" aria-label="Tableau de bord">
+            <!-- ========== COLONNE GAUCHE : FORM + GRAPHIQUE ========== -->
+            <article class="card" aria-label="Ajout de dépense">
+                <div class="card-header">
+                    <h2 id="cardtitle">Nouvelle dépense</h2>
+                    <span class="badge" id="modeBadge">Mode : ajout</span>
+                </div>
+
+                <form id="expenseForm">
+                    <div>
+                        <label for="amount">Montant (€)</label>
+                        <input
+                            type="number"
+                            id="amount"
+                            name="amount"
+                            min="0"
+                            step="0.01"
+                            required
+                            placeholder="ex : 49.99"
+                        />
+                    </div>
+
+                    <div>
+                        <label for="date">Date</label>
+                        <input
+                            type="date"
+                            id="date"
+                            name="date"
+                            required
+                        />
+                    </div>
+
+                    <div class="full-row">
+                        <label for="description">Description</label>
+                        <input
+                            type="text"
+                            id="description"
+                            name="description"
+                            required
+                            placeholder="ex : courses, loyer, abonnement Netflix…"
+                        />
+                    </div>
+
+                    <div>
+                        <label for="category">Catégorie</label>
+                        <select id="category" name="category" required>
+                            <option value="">-- Choisir une catégorie --</option>
+                            <option value="logement">Logement</option>
+                            <option value="alimentation">Alimentation</option>
+                            <option value="transports">Transports</option>
+                            <option value="loisirs">Loisirs</option>
+                            <option value="autres">Autres</option>
+                        </select>
+                    </div>
+
+                    <div class="actions full-row">
+                        <button type="submit" class="primary" id="submitBtn">
+                            💾 <span id="submitLabel">Ajouter la dépense</span>
+                        </button>
+                        <button type="button" class="secondary" id="cancelEditBtn" disabled>
+                            ↩️ Annuler la modification
+                        </button>
+                    </div>
+                </form>
+
+                <section aria-label="Graphique dépenses par catégorie" style="margin-top: 1.1rem;">
+                    <div class="card-header" style="padding: 0;">
+                        <h2 style="margin: 0;">Répartition par catégorie</h2>
+                    </div>
+                    <div id="chart" class="chart-wrapper">
+                        <!-- Barres générées en JS -->
+                    </div>
+                    <div id="chartTotal" class="chart-total"></div>
+                    <div class="chart-legend" aria-label="Légende des catégories">
+                        <div class="legend-item"><span class="legend-dot col-logement"></span> Logement</div>
+                        <div class="legend-item"><span class="legend-dot col-alimentation"></span> Alimentation</div>
+                        <div class="legend-item"><span class="legend-dot col-transports"></span> Transports</div>
+                        <div class="legend-item"><span class="legend-dot col-loisirs"></span> Loisirs</div>
+                        <div class="legend-item"><span class="legend-dot col-autres"></span> Autres</div>
+                    </div>
+                </section>
+                <!-- ========== OBJECTIFS D'ÉPARGNE ========== -->
+                <section class="card" aria-label="Objectifs d'épargne">
+                  <div class="card-header">
+                    <h2>Objectifs d’épargne</h2>
+                    <span class="badge">Suivi</span>
+                  </div>
+
+                  <form id="goalForm" style="margin-top: 0.75rem;">
+                    <div>
+                      <label for="goalName">Nom de l’objectif</label>
+                      <input id="goalName" type="text" placeholder="ex : Voyage à Barcelone" required />
+                    </div>
+
+                    <div>
+                      <label for="goalAmount">Montant cible (€)</label>
+                      <input id="goalAmount" type="number" min="1" step="1" placeholder="ex : 600" required />
+                    </div>
+
+                    <div class="actions full-row">
+                      <button type="submit" class="primary">➕ Ajouter l’objectif</button>
+                    </div>
+                  </form>
+
+                  <div id="goalsList" style="margin-top: 1rem;">
+                    <!-- Objectifs injectés en JS -->
+                  </div>
+                </section>
+            </article>
+
+            <!-- ========== COLONNE DROITE : HISTORIQUE ========== -->
+            <article class="card" aria-label="Historique des dépenses">
+                <div class="card-header">
+                    <h2>Historique</h2>
+                    <section class="vuGlobale" aria-label="Synthèse du budget">
+                      <div class="vuGlobaleCard" id="vuGlobaleCard1">
+                        <span class="metric-label">Restes à vivre</span>
+                        <span class="metric-value" id="resteAVivreValue">—</span>
+                      </div>
+
+                      <div class="vuGlobaleCard" id="vuGlobaleCard2">
+                        <span class="metric-label">Dépenses totales</span>
+                        <span class="metric-value" id="depensesTotalValue">—</span>
+                      </div>
+
+                      <div class="vuGlobaleCard" id="vuGlobaleCard3">
+                        <span class="metric-label">Revenus</span>
+                        <span class="metric-value" id="revenusValue">—</span>
+                      </div>
+                    </section>
+                </div>
+
+                <div class="table-wrapper" id="tableWrapper">
+                    <table aria-describedby="countBadge">
+                        <thead>
+                            <tr>
+                                <th>Date</th>
+                                <th>Type</th>
+                                <th>Description</th>
+                                <th>Catégorie</th>
+                                <th class="amount">Montant</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="expenseTableBody">
+                            <!-- Lignes générées en JS -->
+                        </tbody>
+                    </table>
+                </div>
+                <div id="emptyState" class="empty-state">
+                    Aucune dépense pour le moment. Commence par en ajouter une !
+                </div>
+            </article>
+        </section>
+    </main>
+
+    <!-- Lien vers le JS -->
+    <script src="script.js"></script>
+</body>
+</html>
