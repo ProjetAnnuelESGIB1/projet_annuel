@@ -22,6 +22,21 @@ const submitLabel = document.getElementById('submitLabel');
 const cardTitle = document.getElementById('cardtitle');
 const cancelEditBtn = document.getElementById('cancelEditBtn');
 
+
+const resteAVivreValue = document.getElementById('resteAVivreValue');
+const depensesTotalValue = document.getElementById('depensesTotalValue');
+const revenusValue = document.getElementById('revenusValue');
+
+
+// ----- Objectifs d'épargne -----
+const goalForm = document.getElementById('goalForm');
+const goalNameInput = document.getElementById('goalName');
+const goalAmountInput = document.getElementById('goalAmount');
+const goalsList = document.getElementById('goalsList');
+
+const STORAGE_KEY_GOALS = 'budget_app_goals';
+let goals = [];
+
 // État de l'application
 let expenses = [];  // { id, amount, date, description, category }
 let revenues = [];  // { id, amount, date, description }
@@ -261,6 +276,95 @@ function renderTable() {
 
 }
 
+function loadGoals() {
+  const raw = localStorage.getItem(STORAGE_KEY_GOALS);
+  if (!raw) return;
+  try {
+    const data = JSON.parse(raw);
+    if (Array.isArray(data)) goals = data;
+  } catch {}
+}
+
+function saveGoals() {
+  localStorage.setItem(STORAGE_KEY_GOALS, JSON.stringify(goals));
+}
+
+function renderGoals() {
+  if (!goalsList) return;
+  goalsList.innerHTML = '';
+
+  if (goals.length === 0) {
+    goalsList.innerHTML = '<p class="empty-state">Aucun objectif pour le moment.</p>';
+    return;
+  }
+
+  for (const goal of goals) {
+    const progress = Math.min((goal.saved / goal.target) * 100, 100);
+
+    const div = document.createElement('div');
+    div.className = 'goal-item';
+
+    div.innerHTML = `
+      <div class="goal-header">
+        <span class="goal-name">${goal.name}</span>
+        <button class="danger" data-id="${goal.id}">🗑️</button>
+      </div>
+
+      <div class="goal-amount">
+        ${formatAmount(goal.saved)} / ${formatAmount(goal.target)}
+      </div>
+
+      <div class="goal-bar-bg">
+        <div class="goal-bar-fill" style="width:${progress}%"></div>
+      </div>
+
+      
+      <div class="goal-footer">
+        <div class="goal-actions">
+          <button type="button" class="secondary goal-add" data-id="${goal.id}">➕ +50 €</button>
+          <button type="button" class="secondary goal-add-custom" data-id="${goal.id}">➕ Montant</button>
+        </div>
+
+        <span>${progress.toFixed(1)}%</span>
+      </div>
+
+    `;
+
+    // Supprimer l'objectif
+    div.querySelector('.danger').addEventListener('click', () => {
+      goals = goals.filter(g => g.id !== goal.id);
+      saveGoals();
+      renderGoals();
+    });
+
+    // Ajouter +50 €
+    div.querySelector('.goal-add').addEventListener('click', () => {
+      const g = goals.find(x => x.id === goal.id);
+      if (!g) return;
+
+      g.saved = Math.min(g.target, (Number(g.saved) || 0) + 50);
+      saveGoals();
+      renderGoals();
+    });
+
+    // Ajouter un montant perso
+    div.querySelector('.goal-add-custom').addEventListener('click', () => {
+      const g = goals.find(x => x.id === goal.id);
+      if (!g) return;
+
+      const raw = prompt("Combien veux-tu ajouter à cet objectif ? (en €)");
+      const val = parseFloat((raw || '').replace(',', '.'));
+      if (isNaN(val) || val <= 0) return;
+
+      g.saved = Math.min(g.target, (Number(g.saved) || 0) + val);
+      saveGoals();
+      renderGoals();
+    });
+
+    goalsList.appendChild(div);
+  }
+}
+
 // ------------- Rendu du graphique (dépenses par catégorie) -------------
 
 function renderChart() {
@@ -330,6 +434,34 @@ function renderChart() {
   chartTotal.textContent = 'Total des dépenses : ' + formatAmount(totalAll);
 }
 
+function renderSummary() {
+  const totalExpenses = expenses.reduce((sum, e) => sum + (Number(e.amount) || 0), 0);
+  const totalRevenues = revenues.reduce((sum, r) => sum + (Number(r.amount) || 0), 0);
+  const reste = totalRevenues - totalExpenses;
+
+  // Affichage
+  if (depensesTotalValue) depensesTotalValue.textContent = formatAmount(totalExpenses);
+  if (revenusValue) revenusValue.textContent = formatAmount(totalRevenues);
+  if (resteAVivreValue) resteAVivreValue.textContent = formatAmount(reste);
+
+  // Couleurs (reste à vivre)
+  if (resteAVivreValue) {
+    resteAVivreValue.classList.remove('positive', 'negative', 'neutral');
+    resteAVivreValue.classList.add(reste > 0 ? 'positive' : reste < 0 ? 'negative' : 'neutral');
+  }
+
+  // Couleur cohérente pour revenus/dépenses
+  if (revenusValue) {
+    revenusValue.classList.remove('positive', 'negative', 'neutral');
+    revenusValue.classList.add('positive');
+  }
+  if (depensesTotalValue) {
+    depensesTotalValue.classList.remove('positive', 'negative', 'neutral');
+    depensesTotalValue.classList.add('negative');
+  }
+
+}
+
 // ------------- CRUD Dépenses & Revenus -------------
 
 function addExpense(expense) {
@@ -337,6 +469,7 @@ function addExpense(expense) {
   saveExpenses();
   renderTable();
   renderChart();
+  renderSummary();
 }
 
 function addRevenue(amount) {
@@ -346,11 +479,11 @@ function addRevenue(amount) {
     date: new Date().toISOString().split('T')[0],
     description: 'Revenu'
   };
-
   revenues.push(revenue);
   saveRevenues();
   renderTable();
   renderChart();
+  renderSummary();
 }
 
 function updateExpense(id, updatedFields) {
@@ -360,28 +493,50 @@ function updateExpense(id, updatedFields) {
   saveExpenses();
   renderTable();
   renderChart();
+  renderSummary();
 }
 
 function deleteExpense(id) {
   const sure = confirm('Supprimer définitivement cette dépense ?');
   if (!sure) return;
-
   expenses = expenses.filter((exp) => exp.id !== id);
   saveExpenses();
   renderTable();
   renderChart();
+  renderSummary();
   resetForm();
 }
 
 function deleteRevenue(id) {
   const sure = confirm('Supprimer définitivement ce revenu ?');
   if (!sure) return;
-
   revenues = revenues.filter((rev) => rev.id !== id);
   saveRevenues();
   renderTable();
   renderChart();
+  renderSummary();
 }
+
+function resetAllData() {
+  const sure = confirm(
+    "⚠️ Tu es sûr de vouloir supprimer TOUTES les données ?\n\nDépenses + Revenus seront effacés définitivement."
+  );
+  if (!sure) return;
+
+  expenses = [];
+  revenues = [];
+  editingId = null;
+
+  localStorage.removeItem(STORAGE_KEY_EXPENSES);
+  localStorage.removeItem(STORAGE_KEY_REVENUES);
+
+  renderTable();
+  renderChart();
+  if (typeof renderSummary === "function") renderSummary();
+
+  resetForm();
+}
+
 
 function startEdit(id) {
   const exp = expenses.find((e) => e.id === id);
@@ -452,15 +607,52 @@ if (revenuButton && amountRevenuInput) {
   }
 }
 
+if (resetDataBtn) {
+  resetDataBtn.addEventListener('click', resetAllData);
+}
+
+
+dateInput.addEventListener('click', () => {
+  if (dateInput.showPicker) {
+    dateInput.showPicker(); // Chrome / Edge
+  }
+});
+
+if (goalForm) {
+  goalForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+
+    const name = goalNameInput.value.trim();
+    const target = parseFloat(goalAmountInput.value);
+
+    if (!name || isNaN(target) || target <= 0) return;
+
+    goals.push({
+      id: Date.now().toString(),
+      name,
+      target,
+      saved: 0
+    });
+
+    saveGoals();
+    renderGoals();
+    goalForm.reset();
+  });
+}
+
+
 // ------------- Initialisation -------------
+
 
 function init() {
   loadExpenses();
   loadRevenues();
-
+  loadGoals();       
   dateInput.valueAsDate = new Date();
   renderTable();
   renderChart();
+  renderSummary();
+  renderGoals();     
 }
 
 init();

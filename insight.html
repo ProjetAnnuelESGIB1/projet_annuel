@@ -7,23 +7,79 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <header>
-        <div class= "revenue-function">
-            <a type="submit" class="insight-button" href="index.html">← ACCEUIL</a>
+    <header class="insight-header">
+      <a class="insight-button" href="index.html">← ACCEUIL</a>
+
+      <!-- Vue d'ensemble déplacée dans le header -->
+      <section class="vuGlobale insight-vuGlobale" aria-label="Vue d'ensemble">
+        <div class="vuGlobaleCard compact">
+          <span class="metric-label">Restes à vivre</span>
+          <span class="metric-value" id="resteAVivreValue">—</span>
         </div>
+
+        <div class="vuGlobaleCard compact">
+          <span class="metric-label">Dépenses totales</span>
+          <span class="metric-value" id="depensesTotalValue">—</span>
+        </div>
+
+        <div class="vuGlobaleCard compact">
+          <span class="metric-label">Revenus</span>
+          <span class="metric-value" id="revenusValue">—</span>
+        </div>
+      </section>
     </header>
     <section class="grid" aria-label="Tableau de bord">
-        <article class="card" aria-label="historique des dépenses">
-            <div class="card-header">
-                <h2>Vue d'ensemble</h2>
-                <section class="vuGlobale">
-                    <p class="vuGlobaleCard" id="vuGlobaleCard1">Restes à vivre :</p>
-                    <p class="vuGlobaleCard" id="vuGlobaleCard2">Dépenses total :</p>
-                    <p class="vuGlobaleCard" id="vuGlobaleCard3">Revenu :</p>
-                </section>
+      <!-- Carousel d'infos -->
+      <article class="card" aria-label="Insights">
+        <div class="card-header">
+          <h2>Infos</h2>
+
+          <div class="carousel-controls" aria-label="Contrôles du carousel">
+            <button type="button" class="secondary carousel-btn" id="prevSlide" aria-label="Slide précédent">‹</button>
+            <button type="button" class="secondary carousel-btn" id="nextSlide" aria-label="Slide suivant">›</button>
+          </div>
+        </div>
+
+        <div class="carousel-viewport" aria-live="polite">
+          <div class="carousel-track" id="carouselTrack">
+            <!-- Slides injectées en JS -->
+          </div>
+        </div>
+
+        <div class="carousel-dots" id="carouselDots" aria-label="Pagination"></div>
+      </article>
+
+      <!-- Camembert + légende -->
+      <article class="card" aria-label="Répartition des dépenses">
+        <div class="card-header">
+          <h2>Répartition des dépenses</h2>
+          <span class="badge" id="pieTotalBadge">—</span>
+        </div>
+
+        <div class="pie-grid">
+          <svg
+            class="pie-svg"
+            id="pieSvg"
+            viewBox="0 0 260 260"
+            role="img"
+            aria-labelledby="pieTitle pieDesc"
+          >
+            <title id="pieTitle">Camembert des dépenses</title>
+            <desc id="pieDesc">Répartition des dépenses par catégorie</desc>
+            <!-- Segments injectés en JS -->
+          </svg>
+
+          <aside class="pie-legend" aria-label="Légende">
+            <div class="legend-head">
+              <span>Catégorie</span>
+              <span>%</span>
             </div>
-          
-        </article>
+            <div id="pieLegendList" class="legend-list"></div>
+          </aside>
+        </div>
+      </article>
     </section>
+
+    <script src="insight.js"></script>
 </body>
 </html>

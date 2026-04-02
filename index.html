@@ -12,9 +12,14 @@
     <main class="app" aria-label="Application de gestion de budget">
         <header>
             <section class="navbar">
-                <h1>Gestion de budget</h1>
-                <div class= "revenue-function">
-                    <a type="submit" class="insight-button" href="insight.html">INSIGHT</a>
+                <h1>Gestion de budget</h1>               
+                <div class="revenue-function">
+                  <a class="insight-button" href="insight.html">INSIGHT</a>
+
+                  <!-- Bouton reset -->
+                  <button type="button" class="reset-button" id="resetDataBtn" title="Supprimer toutes les données">
+                    RESET
+                  </button>
                 </div>
                 <section class="revenue-button" id="revenuButton">
                         <label for="amountRevenu">Mes Revenues (€)</label>
@@ -107,16 +112,54 @@
                         <div class="legend-item"><span class="legend-dot col-autres"></span> Autres</div>
                     </div>
                 </section>
+                <!-- ========== OBJECTIFS D'ÉPARGNE ========== -->
+                <section class="card" aria-label="Objectifs d'épargne">
+                  <div class="card-header">
+                    <h2>Objectifs d’épargne</h2>
+                    <span class="badge">Suivi</span>
+                  </div>
+
+                  <form id="goalForm" style="margin-top: 0.75rem;">
+                    <div>
+                      <label for="goalName">Nom de l’objectif</label>
+                      <input id="goalName" type="text" placeholder="ex : Voyage à Barcelone" required />
+                    </div>
+
+                    <div>
+                      <label for="goalAmount">Montant cible (€)</label>
+                      <input id="goalAmount" type="number" min="1" step="1" placeholder="ex : 600" required />
+                    </div>
+
+                    <div class="actions full-row">
+                      <button type="submit" class="primary">➕ Ajouter l’objectif</button>
+                    </div>
+                  </form>
+
+                  <div id="goalsList" style="margin-top: 1rem;">
+                    <!-- Objectifs injectés en JS -->
+                  </div>
+                </section>
             </article>
 
             <!-- ========== COLONNE DROITE : HISTORIQUE ========== -->
             <article class="card" aria-label="Historique des dépenses">
                 <div class="card-header">
                     <h2>Historique</h2>
-                    <section class="vuGlobale">
-                        <p class="vuGlobaleCard" id="vuGlobaleCard1">Restes à vivre :</p>
-                        <p class="vuGlobaleCard" id="vuGlobaleCard2">Dépenses total :</p>
-                        <p class="vuGlobaleCard" id="vuGlobaleCard3">Revenu :</p>
+                    <section class="vuGlobale" aria-label="Synthèse du budget">
+                      <div class="vuGlobaleCard" id="vuGlobaleCard1">
+                        <span class="metric-label">Restes à vivre</span>
+                        <span class="metric-value" id="resteAVivreValue">—</span>
+                      </div>
+
+                      <div class="vuGlobaleCard" id="vuGlobaleCard2">
+                        <span class="metric-label">Dépenses totales</span>
+                        <span class="metric-value" id="depensesTotalValue">—</span>
+                      </div>
+
+                      <div class="vuGlobaleCard" id="vuGlobaleCard3">
+                        <span class="metric-label">Revenus</span>
+                        <span class="metric-value" id="revenusValue">—</span>
+                      </div>
                     </section>
                 </div>
 
