@@ -123,8 +123,8 @@ header {
   position: sticky;
   top: 0;
   z-index: 9999;
-  background: rgba(15, 23, 42, 0.98); /* petit voile opaque */
-  backdrop-filter: blur(4px); /* optionnel, effet stylé */
+  background: rgba(15, 23, 42, 0.98); 
+  backdrop-filter: blur(4px);
 }
 
 .navbar{
@@ -446,11 +446,7 @@ td.category-pill span {
 .col-loisirs { background: #f43f5e; }
 .col-autres { background: #64748b; }
 
-/* =======================
-   INSIGHT (carousel + pie)
-   - Ajouts minimalistes
-   - Garde le style de l'index
-   ======================= */
+/* =======================   INSIGHT (carousel + pie)   ======================= */
 
 /* ---- Carousel ---- */
 .carousel-controls{
@@ -605,9 +601,7 @@ td.category-pill span {
   }
 }
 
-/* ======================
-   INSIGHT – Header compact
-   ====================== */
+/* ======================   INSIGHT – Header compact   ====================== */
 
 .insight-header{
   display: flex;
@@ -653,9 +647,7 @@ td.category-pill span {
 }
 
 
-/* ======================
-   INSIGHT – breathing space
-   ====================== */
+/* ======================   INSIGHT – breathing space   ====================== */
 
 /* espace interne pour Infos */
 .card[aria-label="Insights"] .carousel-viewport {
@@ -668,9 +660,7 @@ td.category-pill span {
 }
 
 
-/* ======================
-   INSIGHT – spacing écran
-   ====================== */
+/* ======================   INSIGHT – spacing écran   ====================== */
 
 /* espace entre le contenu INSIGHT et le bord de l'écran */
 body > .grid {
@@ -679,18 +669,14 @@ body > .grid {
 }
 
 
-/* ======================
-   INSIGHT – header spacing écran
-   ====================== */
+/* ======================   INSIGHT – header spacing   ====================== */
 
 .insight-header{
   padding-left: 1rem;
   padding-right: 1rem;
 }
 
-/* ======================
-   OBJECTIFS D'ÉPARGNE
-   ====================== */
+/* ======================   OBJECTIFS D'ÉPARGNE   ====================== */
 
 .goal-item{
   border: 1px solid #1f2937;
