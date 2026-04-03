@@ -116,7 +116,7 @@ function renderPie(expenses) {
   if (!pieSvg || !pieLegendList) return;
 
   const totals = computeCategoryTotals(expenses);
-  const nonEmptyCats = CATEGORY_ORDER.filter((c) => totals[c] > 0); // ✅ uniquement si > 0
+  const nonEmptyCats = CATEGORY_ORDER.filter((c) => totals[c] > 0); // uniquement si > 0
   const totalAll = nonEmptyCats.reduce((sum, c) => sum + totals[c], 0);
 
   pieLegendList.innerHTML = '';
