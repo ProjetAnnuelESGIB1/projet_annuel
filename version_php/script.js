@@ -154,7 +154,7 @@ function startEdit(id) {
   amountInput.focus();
 }
 
-// Reset DB (avec tes endpoints existants) : on supprime tout en boucle
+// Reset DB
 async function resetAllData() {
   const sure = confirm(
     "⚠️ Tu es sûr de vouloir supprimer TOUTES les données ?\n\nDépenses + Revenus + Objectifs seront effacés."
@@ -575,8 +575,8 @@ if (revenuButton && amountRevenuInput) {
         return;
       }
 
-      await addRevenue(amount); // ✅ envoie au PHP/MySQL (via fetch dans addRevenue)
-      amountRevenuInput.value = ""; // ✅ reset du champ
+      await addRevenue(amount); // envoie au PHP/MySQL
+      amountRevenuInput.value = ""; // reset du champ
     });
   }
 }
@@ -588,7 +588,7 @@ if (resetDataBtn) {
 
 dateInput.addEventListener('click', () => {
   if (dateInput.showPicker) {
-    dateInput.showPicker(); // Chrome / Edge
+    dateInput.showPicker();
   }
 });
 
