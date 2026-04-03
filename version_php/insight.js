@@ -35,7 +35,7 @@ const CATEGORY_LABEL = {
   autres: 'Autres',
 };
 
-// couleurs = identiques à tes .col-* dans styles.css [1](https://reseauges75-my.sharepoint.com/personal/m_lequy_myskolae_fr/Documents/Fichiers%20Microsoft%20Copilot%20Chat/styles.css)
+// Couleurs
 const CATEGORY_COLOR = {
   logement: '#3b82f6',
   alimentation: '#22c55e',
@@ -177,7 +177,7 @@ function renderPie(expenses) {
     row.appendChild(right);
     pieLegendList.appendChild(row);
 
-    return; // ✅ on stoppe ici, pas besoin de dessiner des arcs
+    return;
   }
 
   if (totalAll <= 0) {
@@ -212,7 +212,7 @@ function renderPie(expenses) {
     });
     pieSvg.appendChild(path);
 
-    // % label sur la part (si pas trop petit)
+    // % label sur la part
     if (pct >= 7) {
       const mid = start + slice / 2;
       const p = polarToCartesian(cx, cy, r * 0.62, mid);
