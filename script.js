@@ -614,7 +614,7 @@ if (resetDataBtn) {
 
 dateInput.addEventListener('click', () => {
   if (dateInput.showPicker) {
-    dateInput.showPicker(); // Chrome / Edge
+    dateInput.showPicker();
   }
 });
 
