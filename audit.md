@@ -50,5 +50,54 @@
 > Vos fichiers CSS et JS sont-ils liés dans le bon ordre ? (`<link>` CSS dans le `<head>`, `<script>` JS avant `</body>`)
 > Oui
 
+## JavaScript
 
+### Critère 1 — Réutilisation des fonctions
 
+> Avez-vous écrit des blocs de code JS très similaires à plusieurs endroits ? Si oui, pouvez-vous les regrouper dans une fonction commune ?
+> Non, chacuns des blocs fais quelque chose de spécifiques.
+
+### Critère 2 — Organisation du code JS
+
+> Votre JavaScript est-il dans un seul gros bloc ? Avez-vous pensé à regrouper les fonctions par thème, ou à utiliser des commentaires pour s'y retrouver ?
+> Oui, plusieurs thèmes sont présent pour retrouver des fonctions.
+
+### Critère 3 — Pas de `console.log` oubliés
+
+> Avez-vous pensé à supprimer (ou commenter) vos `console.log` de debug avant de livrer ?
+> Oui nous les avons supprimé
+
+### Critère 4 — `const` et `let` plutôt que `var`
+
+> Utilisez-vous `const` pour les valeurs fixes et `let` pour celles qui évoluent ? Avez-vous encore des `var` dans votre code ?
+>Aucun `var` n'est présent dans le code, seulement des `const` et des `let`.
+
+### Critère 5 — Cache des sélections DOM
+
+> Stockez-vous vos sélections `querySelector` dans des variables pour ne les faire qu'une fois, plutôt que de les répéter à chaque appel ?
+>Sur les 4, un `querySelector` est dans une variable et 3 autres sont répéter a chaque fois qu'on les appelles car on ne peut pas faire autrement étant donné qu'ils ont une incidence sur des éléments dynamiques.
+
+### Critère 6 — Gestion des événements propre
+
+> Utilisez-vous `addEventListener` ? Ou avez-vous encore des `onclick="..."` directement dans votre HTML ?
+>Nous utilisons des `addEventListener` activement.
+
+### Critère 7 — Pas de code JS dans les fichiers HTML
+
+> Votre JavaScript est-il dans un fichier `.js` séparé ? Ou avez-vous de gros blocs `<script>` directement dans vos pages HTML ?
+> Les JavaScript sont dans des fichiers `.js` séparé.
+
+### Critère 8 — Nommage clair des fonctions et variables
+
+> Vos fonctions JS décrivent-elles clairement leur action ? (`afficherMenu()`, `calculerTotal()`) plutôt que (`f1()`, `truc()`) ?
+> Oui ,les fonctions ont un nom qui décrivent clairement leurs actions. 
+
+### Critère 9 — Gestion basique des erreurs sur les `fetch`
+
+> Lorsque vous faites une requête `fetch`, gérez-vous les cas d'erreur (réseau KO, réponse non-OK) ?
+>Sur le seul `fetch` présent oui nous gérons le cas d'erreur.
+
+### Critère 10 — Commentaires sur le code complexe
+
+> Avez-vous commenté les parties de votre JS qui ne sont pas immédiatement compréhensibles ? Un collègue pourrait-il reprendre votre code sans vous poser de questions ?
+>Non, il est trés compliqué de reprendre le code une semaine plus tard ou anciennement écrit par un collégue.
