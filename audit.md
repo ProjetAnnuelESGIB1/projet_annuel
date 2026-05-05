@@ -50,6 +50,67 @@
 > Vos fichiers CSS et JS sont-ils liés dans le bon ordre ? (`<link>` CSS dans le `<head>`, `<script>` JS avant `</body>`)
 > Oui
 
+## CCS
+
+### Critère 1 — Pas de règles en double
+
+> Avez-vous des propriétés CSS répétées plusieurs fois pour le même effet ? Avez-vous pensé à créer des classes réutilisables ?
+>Non, nos proprietés ne se répete pas pour les meme effet et Oui nous avons creee des classes reutilisables
+
+
+### Critère 2 — Organisation du fichier CSS
+
+> Votre CSS est-il organisé de façon logique ? (global → composants → pages) — et êtes-vous en mesure de retrouver rapidement une règle ?
+>oui completement.
+
+
+### Critère 3 — Variables CSS
+
+> Utilisez-vous des variables CSS (`--couleur-primaire`, `--font-titre`…) pour vos couleurs et polices récurrentes ?
+>oui effectivement.
+
+
+### Critère 4 — Pas de valeurs magiques
+
+> Avez-vous des valeurs numériques arbitraires dans votre CSS (`margin: 37px`, `top: 13px`…) sans que l'on comprenne pourquoi ce chiffre précis ?
+>oui nous en avons.
+
+
+### Critère 5 — Responsive / Media queries
+
+> Votre site s'affiche-t-il correctement sur mobile ? Avez-vous utilisé des media queries pour adapter la mise en page ?
+>Non nous n'avons pas adapter pour mobile encore et oui les media queries ont été utiliser pour la mise en page.(a voir)
+
+
+### Critère 6 — Nommage des classes
+
+> Vos classes CSS ont-elles des noms qui décrivent leur rôle ? (`.card`, `.btn-primary`) plutôt que (`.rouge`, `.div2`) ?
+>oui completement
+
+
+### Critère 7 — Pas d'abus de `!important`
+
+> Avez-vous utilisé `!important` pour forcer des styles ? C'est souvent le signe d'un conflit de spécificité à résoudre proprement.
+>pas du tout utiliser.
+
+
+### Critère 8 — Utilisation de Flexbox ou Grid
+
+> Utilisez-vous `flex` ou `grid` pour vos mises en page plutôt que des `float` ou `position: absolute` un peu partout ?
+> oui amplement
+
+
+### Critère 9 — Cohérence visuelle
+
+> Vos espacements, tailles de police et couleurs sont-ils cohérents sur l'ensemble du site ? Ou chaque page a-t-elle ses propres valeurs "au feeling" ?
+>oui nos espacements, tailles de police et couleurs sont cohérents sur l'ensemble du site (pour chaque page)
+
+
+### Critère 10 — Commentaires de section dans le CSS
+
+> Avez-vous ajouté des commentaires pour délimiter les grandes sections de votre fichier CSS ?
+>Oui en effet.
+
 ## JavaScript
 
 ### Critère 1 — Réutilisation des fonctions
