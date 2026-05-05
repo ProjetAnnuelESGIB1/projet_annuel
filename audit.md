@@ -113,8 +113,6 @@
 
 ## PHP
 
-## PHP
-
 ### Critère 1 — Pas de fonctions dupliquées
 
 > Avez-vous écrit deux fois la même logique ? Si oui, c'est le signe qu'une fonction réutilisable est nécessaire.
