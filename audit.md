@@ -33,7 +33,7 @@
 ### Critère 7 - Utilisation de balise obselète
 
 > Utilisez-vous encore des balises obsolètes comme `<center>`, `<font>`, ou `<b>` à la place de `<strong>` ?
-> Non,
+> Non
 
 ### Critère 8 — Indentation cohérente
 
