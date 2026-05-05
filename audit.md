@@ -111,6 +111,55 @@
 > Avez-vous ajouté des commentaires pour délimiter les grandes sections de votre fichier CSS ?
 >Oui en effet.
 
+## PHP
+
+## PHP
+
+### Critère 1 — Pas de fonctions dupliquées
+
+> Avez-vous écrit deux fois la même logique ? Si oui, c'est le signe qu'une fonction réutilisable est nécessaire.
+> Oui, la même logique est répétée dans plusieurs fichiers (routing HTTP, lecture du JSON, gestion des erreurs)
+
+### Critère 2 — Utilisation des transactions
+
+> Lorsque vous faites plusieurs requêtes SQL qui dépendent les unes des autres, utilisez-vous des transactions pour garantir la cohérence des données ?
+> Non car chaque action n’exécute qu’une seule requête SQL
+
+### Critère 3 — Séparation de la logique et de l'affichage
+
+> Votre PHP "métier" (requêtes, calculs) est-il mélangé directement dans vos fichiers HTML ? Ou avez-vous commencé à séparer ces responsabilités ?
+> Oui, la logique métier (requêtes SQL, traitements) est contenue dans des fichiers PHP dédiés à l’API et n’est pas mélangée avec du HTML.
+
+### Critère 4 — Requêtes préparées
+
+> Utilisez-vous des requêtes préparées (`prepare` + `execute`) pour toutes les requêtes qui utilisent des données venant de l'utilisateur ?
+> Oui, toutes les requêtes utilisant des données provenant de l’utilisateur utilisent des requêtes préparées (prepare + execute), ce qui protège contre les injections SQL.
+
+### Critère 5 — Gestion des erreurs
+
+> Vos opérations sensibles sont-elles entourées de `try/catch` ? Affichez-vous un message d'erreur compréhensible plutôt qu'une page blanche ?
+> Les erreurs sont gérées via des codes HTTP et des messages JSON (Invalid data, Missing id), donc l’API ne renvoie pas de page blanche. En revanche, les opérations SQL ne sont pas entourées de try/catch, ce qui limite la gestion des erreurs côté serveur.
+
+### Critère 6— Validation des données reçues
+
+> Vérifiez-vous que les données envoyées via un formulaire sont bien présentes et du bon type avant de les utiliser (`isset`, `empty`, `filter_var`…) ?
+> Oui, la présence des données est vérifiée avec isset, ce qui évite l’utilisation de champs manquants. En revanche, le type et le format des données (ex : nombres, dates) ne sont pas validés.
+
+### Critère 7 — Utilisation de `include` / `require`
+
+> Avez-vous factorisé vos éléments communs (header, footer, connexion BDD) dans des fichiers séparés inclus avec `include` ou `require` ?
+> Oui, la connexion à la base de données est factorisée dans un fichier séparé (db.php) et incluse avec require.
+
+### Critère 8 — Nommage cohérent des variables et fonctions
+
+> Vos variables et fonctions PHP ont-elles des noms clairs ? (`$userId`, `getUserById()`) plutôt que (`$u`, `$x`, `getData()`) ?
+> Oui, les variables utilisent des noms clairs et explicites ($amount, $date, $description, $category, $id, $pdo, $stmt), ce qui rend le code lisible et compréhensible. 
+
+### Critère 10 — Pas d'affichage d'erreurs en production
+
+> Avez-vous désactivé l'affichage des erreurs PHP côté utilisateur sur votre version déployée ? Les erreurs techniques ne doivent pas être visibles par l'utilisateur final.
+> Oui
+
 ## JavaScript
 
 ### Critère 1 — Réutilisation des fonctions
