@@ -22,7 +22,7 @@
 
 ### Critère 5 - Titres
 
-> Chaque page ne contient-elle qu'un seul titre principal <h1> ? Les niveaux de titres sont-ils respectés (h1 → h2 → h3…) ?
+> Chaque page ne contient-elle qu'un seul titre principal `<h1>` ? Les niveaux de titres sont-ils respectés (h1 → h2 → h3…) ?
 > Pas de doublon pour la balise `<h1>`
 
 ### Critère 6 — Formulaires bien structurés
