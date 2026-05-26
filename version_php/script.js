@@ -457,7 +457,7 @@ function renderChart() {
 
   for (const exp of expenses) {
     const cat = exp.category || 'autres';
-    const amt = exp.amount;
+    const amt = parseFloat(exp.amount) || 0;
     if (!totals[cat]) totals[cat] = 0;
     totals[cat] += amt;
     totalAll += amt;
