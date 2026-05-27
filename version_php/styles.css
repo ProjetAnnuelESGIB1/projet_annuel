@@ -1,48 +1,148 @@
-/* ========== RESET SIMPLE ========== */
+/* =============================================================================
+   STYLES.CSS — Budget Dashboard
+   Structure :
+     1. Reset & Base
+     2. Typographie
+     3. Layout global
+     4. Navigation / Header
+     5. Cards
+     6. Métriques (Vue Globale)
+     7. Formulaire
+     8. Boutons
+     9. Tableau historique
+    10. Graphique catégories
+    11. Objectifs d'épargne
+    12. Insight — Carousel
+    13. Insight — Pie Chart
+    14. Insight — Header compact
+    15. Responsive
+============================================================================= */
+
+
+/* =============================================================================
+   1. RESET & BASE
+============================================================================= */
+
 * {
     box-sizing: border-box;
 }
+
 body {
     margin: 0;
-    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
-        Roboto, sans-serif;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
     background: #0f172a;
     color: #e5e7eb;
 }
 
-/* ========== LAYOUT GLOBAL ========== */
+
+/* =============================================================================
+   2. TYPOGRAPHIE
+============================================================================= */
+
+h1 {
+    font-size: 1.8rem;
+    margin-bottom: 0.25rem;
+}
+
+h2 {
+    font-size: 1.3rem;
+    margin: 1.5rem 0 0.75rem;
+}
+
+p {
+    color: #9ca3af;
+    margin-top: 0;
+}
+
+
+/* =============================================================================
+   3. LAYOUT GLOBAL
+============================================================================= */
+
 .app {
     max-width: 1300px;
     margin: 0 auto;
     padding: 2rem 1rem 3rem;
 }
 
-h1 {
-    font-size: 1.8rem;
-    margin-bottom: 0.25rem;
-}
-h2 {
-    font-size: 1.3rem;
-    margin: 1.5rem 0 0.75rem;
-}
-p {
-    color: #9ca3af;
-    margin-top: 0;
-}
-
 .grid {
     display: grid;
     grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
     gap: 1.5rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
 }
 
-@media (max-width: 900px) {
-    .grid {
-        grid-template-columns: 1fr;
-    }
+
+/* =============================================================================
+   4. NAVIGATION / HEADER
+============================================================================= */
+
+header {
+    position: sticky;
+    top: 0;
+    z-index: 9999;
+    background: rgba(15, 23, 42, 0.98);
+    backdrop-filter: blur(4px);
 }
 
-/* ========== CARDS ========== */
+.navbar {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 0.5rem 0;
+}
+
+/* Le titre prend la place et pousse le reste à droite */
+.navbar h1 {
+    margin-right: auto;
+}
+
+.badge {
+    font-size: 0.75rem;
+    padding: 0.15rem 0.5rem;
+    border-radius: 999px;
+    border: 1px solid #1f2937;
+    color: #9ca3af;
+}
+
+.revenue-function {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+}
+
+.revenue-button {
+    background-color: #020617;
+    padding: 20px;
+    border-radius: 2rem;
+    text-decoration: none;
+    color: white;
+    border: 1px solid #1f2937;
+    box-shadow: 0 18px 45px rgba(15, 23, 42, 0.75);
+    margin-left: 1rem;
+}
+
+.revenue-button label {
+    color: white;
+}
+
+.revenue-button input {
+    width: 160px;
+    height: 26px;
+}
+
+.revenue-button button {
+    background: linear-gradient(135deg, #22c55e, #16a34a);
+    color: #022c22;
+    box-shadow: 0 12px 24px rgba(34, 197, 94, 0.45);
+}
+
+
+/* =============================================================================
+   5. CARDS
+============================================================================= */
+
 .card {
     background: #020617;
     border-radius: 0.75rem;
@@ -57,102 +157,81 @@ p {
     align-items: baseline;
 }
 
-
-/* --- Synthèse (Restes à vivre / Dépenses / Revenus) --- */
-.vuGlobale{
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 0.9rem;             
-  align-items: stretch;
-  margin-left: 1rem;     
+/* Espace interne pour les cards Insight */
+.card[aria-label="Insights"] .carousel-viewport {
+    padding: 0.75rem;
 }
 
-/* Carte métrique */
-.vuGlobaleCard{
-  padding: 0.9rem 1rem;
-  border-radius: 1rem;
-  background: #020617;
-  border: 1px solid #1f2937;
-  box-shadow: 0 18px 45px rgba(15, 23, 42, 0.5);
-  display: flex;
-  flex-direction: column;
-  gap: 0.25rem;             
-  min-height: 82px;
+.card[aria-label="Répartition des dépenses"] .pie-grid {
+    padding: 0.75rem;
 }
 
-/* Label au-dessus */
-.metric-label{
-  font-size: 0.78rem;
-  color: #9ca3af;
-  letter-spacing: 0.02em;
-  text-transform: uppercase;
+
+/* =============================================================================
+   6. MÉTRIQUES (VUE GLOBALE)
+============================================================================= */
+
+.vuGlobale {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 0.9rem;
+    align-items: stretch;
+    margin-left: 1rem;
 }
 
-/* Valeur */
-.metric-value{
-  font-size: 1.25rem;
-  font-weight: 700;
-  font-variant-numeric: tabular-nums;
-  color: #e5e7eb;
+.vuGlobaleCard {
+    padding: 0.9rem 1rem;
+    border-radius: 1rem;
+    background: #020617;
+    border: 1px solid #1f2937;
+    box-shadow: 0 18px 45px rgba(15, 23, 42, 0.5);
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    min-height: 82px;
 }
 
-/* Couleurs selon le montant */
+.vuGlobaleCard.compact {
+    padding: 0.55rem 0.75rem;
+    min-height: auto;
+}
+
+.metric-label {
+    font-size: 0.78rem;
+    color: #9ca3af;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+}
+
+.vuGlobaleCard.compact .metric-label {
+    font-size: 0.7rem;
+}
+
+.metric-value {
+    font-size: 1.25rem;
+    font-weight: 700;
+    font-variant-numeric: tabular-nums;
+    color: #e5e7eb;
+}
+
+.vuGlobaleCard.compact .metric-value {
+    font-size: 1.05rem;
+}
+
 .metric-value.positive { color: #22c55e; }
 .metric-value.negative { color: #ef4444; }
 .metric-value.neutral  { color: #93c5fd; }
 
-/* Responsive */
-@media (max-width: 900px){
-  .vuGlobale{
-    grid-template-columns: 1fr;
-    margin-left: 0;
-  }
-}
 
+/* =============================================================================
+   7. FORMULAIRE
+============================================================================= */
 
-.badge {
-    font-size: 0.75rem;
-    padding: 0.15rem 0.5rem;
-    border-radius: 999px;
-    border: 1px solid #1f2937;
-    color: #9ca3af;
-}
-
-
-header {
-  position: sticky;
-  top: 0;
-  z-index: 9999;
-  background: rgba(15, 23, 42, 0.98);
-  backdrop-filter: blur(4px); 
-}
-
-.navbar{
-  display: flex;
-  align-items: center;
-  gap: 1rem;              /* espace global entre les blocs */
-  padding: 0.5rem 0;
-}
-
-/* le titre prend la place et pousse le reste à droite */
-.navbar h1{
-  margin-right: auto;
-}
-
-
-
-/* ========== FORMULAIRE ========== */
 form {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 0.75rem 1rem;
     margin-top: 0.75rem;
-}
-
-@media (max-width: 600px) {
-    form {
-        grid-template-columns: 1fr;
-    }
 }
 
 label {
@@ -162,7 +241,8 @@ label {
     color: #9ca3af;
 }
 
-input, select {
+input,
+select {
     width: 100%;
     padding: 0.5rem 0.6rem;
     border-radius: 0.5rem;
@@ -172,7 +252,8 @@ input, select {
     font-size: 0.9rem;
 }
 
-input:focus, select:focus {
+input:focus,
+select:focus {
     outline: 2px solid #22c55e;
     outline-offset: 1px;
     border-color: transparent;
@@ -188,6 +269,11 @@ input:focus, select:focus {
     margin-top: 0.5rem;
 }
 
+
+/* =============================================================================
+   8. BOUTONS
+============================================================================= */
+
 button {
     border-radius: 999px;
     border: none;
@@ -196,6 +282,7 @@ button {
     cursor: pointer;
     display: inline-flex;
     align-items: center;
+    justify-content: center;
     gap: 0.3rem;
     font-weight: 500;
     transition: transform 0.05s ease, box-shadow 0.05s ease, opacity 0.15s;
@@ -206,6 +293,13 @@ button:active {
     box-shadow: none;
 }
 
+button:disabled {
+    opacity: 0.4;
+    cursor: default;
+    box-shadow: none;
+}
+
+/* Variantes */
 button.primary {
     background: linear-gradient(135deg, #22c55e, #16a34a);
     color: #022c22;
@@ -223,13 +317,69 @@ button.danger {
     color: #fee2e2;
 }
 
-button:disabled {
-    opacity: 0.4;
-    cursor: default;
+/* Bouton Insight */
+.insight-button {
+    height: 36px;
+    padding: 0 1.1rem;
+    margin-top: 0;
+    border-radius: 2rem;
+    font-weight: 700;
+    font-size: 0.95rem;
+    line-height: 1;
+    color: white;
+    background-color: #042098;
+    text-decoration: none;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+}
+
+.insight-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 16px rgba(0, 35, 192, 0.3);
+    background-color: #001a80;
+}
+
+/* Bouton Reset */
+.reset-button {
+    height: 36px;
+    padding: 0 1.1rem;
+    margin-top: 0;
+    border-radius: 2rem;
+    font-weight: 700;
+    line-height: 1;
+    background: #111827;
+    color: #e5e7eb;
+    border: 1px solid #334155;
+    cursor: pointer;
+    transition: transform 0.15s ease, box-shadow 0.2s ease, background 0.2s ease;
+}
+
+.reset-button:hover {
+    background: #0b1220;
+    box-shadow: 0 8px 16px rgba(239, 68, 68, 0.2);
+    transform: translateY(-2px);
+}
+
+.reset-button:active {
+    transform: translateY(0);
     box-shadow: none;
 }
 
-/* ========== TABLEAU HISTORIQUE ========== */
+.reset-button:focus-visible {
+    outline: 2px solid #ef4444;
+    outline-offset: 2px;
+}
+
+
+/* =============================================================================
+   9. TABLEAU HISTORIQUE
+============================================================================= */
+
+.table-wrapper {
+    max-height: 350px;
+    overflow: auto;
+}
+
 table {
     width: 100%;
     border-collapse: collapse;
@@ -244,7 +394,8 @@ thead {
     z-index: 1;
 }
 
-th, td {
+th,
+td {
     padding: 0.45rem 0.4rem;
     text-align: left;
     border-bottom: 1px solid #111827;
@@ -274,16 +425,12 @@ td.category-pill span {
     font-size: 0.75rem;
 }
 
-.cat-logement { background: rgba(59, 130, 246, 0.1); color: #93c5fd; }
-.cat-alimentation { background: rgba(34, 197, 94, 0.1); color: #86efac; }
-.cat-transports { background: rgba(249, 115, 22, 0.1); color: #fed7aa; }
-.cat-loisirs { background: rgba(244, 63, 94, 0.1); color: #f9a8d4; }
-.cat-autres { background: rgba(148, 163, 184, 0.1); color: #e5e7eb; }
-
-.table-wrapper {
-    max-height: 350px;
-    overflow: auto;
-}
+/* Pills de catégories */
+.cat-logement      { background: rgba(59, 130, 246, 0.1); color: #93c5fd; }
+.cat-alimentation  { background: rgba(34, 197, 94, 0.1);  color: #86efac; }
+.cat-transports    { background: rgba(249, 115, 22, 0.1); color: #fed7aa; }
+.cat-loisirs       { background: rgba(244, 63, 94, 0.1);  color: #f9a8d4; }
+.cat-autres        { background: rgba(148, 163, 184, 0.1); color: #e5e7eb; }
 
 .empty-state {
     font-size: 0.9rem;
@@ -291,7 +438,11 @@ td.category-pill span {
     padding: 0.75rem 0.1rem;
 }
 
-/* ========== GRAPHIQUE CATEGORIES ========== */
+
+/* =============================================================================
+   10. GRAPHIQUE CATÉGORIES
+============================================================================= */
+
 .chart-wrapper {
     margin-top: 0.5rem;
     display: flex;
@@ -327,6 +478,13 @@ td.category-pill span {
     transition: width 0.3s ease;
 }
 
+/* Couleurs des barres */
+.col-logement     { background: #3b82f6; }
+.col-alimentation { background: #22c55e; }
+.col-transports   { background: #f97316; }
+.col-loisirs      { background: #f43f5e; }
+.col-autres       { background: #64748b; }
+
 .chart-total {
     margin-top: 0.5rem;
     font-size: 0.85rem;
@@ -353,387 +511,265 @@ td.category-pill span {
     border-radius: 999px;
 }
 
-.insight-button:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 8px 16px rgba(0, 35, 192, 0.3);
-    background-color: #001a80;
-}
 
-.revenue-function{
-  display: flex;
-  align-items: center;
-  gap: 0.6rem;
-}
+/* =============================================================================
+   11. OBJECTIFS D'ÉPARGNE
+============================================================================= */
 
-
-.insight-button,
-.reset-button{
-  margin-top: 0;                
-  height: 36px;                
-  padding: 0 1.1rem;            
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 2rem;
-  font-weight: 700;
-  line-height: 1;               
-}
-
-.insight-button{
-  color: white;
-  background-color: #042098;
-  text-decoration: none;
-  font-size: 0.95rem;
-  cursor: pointer;
-  transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
-}
-
-.reset-button{
-  background: #111827;
-  color: #e5e7eb;
-  border: 1px solid #334155;
-  cursor: pointer;
-  transition: transform 0.15s ease, box-shadow 0.2s ease, background 0.2s ease;
-}
-
-.reset-button:hover{
-  background: #0b1220;
-  box-shadow: 0 8px 16px rgba(239, 68, 68, 0.2);
-  transform: translateY(-2px);
-}
-
-.reset-button:active{
-  transform: translateY(0);
-  box-shadow: none;
-}
-
-.reset-button:focus-visible{
-  outline: 2px solid #ef4444;
-  outline-offset: 2px;
-}
-
-
-.revenue-button {
-    background-color: #020617;
-    padding: 20px;
-    border-radius: 2rem;
-    text-decoration: none;
-    color: white;
+.goal-item {
     border: 1px solid #1f2937;
-    box-shadow: 0 18px 45px rgba(15, 23, 42, 0.75);
-    margin-left: 1rem;
+    border-radius: 0.75rem;
+    padding: 0.75rem;
+    margin-bottom: 0.6rem;
+    background: #020617;
 }
 
-.revenue-button label {
-    color: white;
+.goal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.4rem;
 }
 
-.revenue-button input {
-    width:160px;
-    height:26px;
+.goal-name {
+    font-weight: 700;
+    color: #e5e7eb;
 }
 
-.revenue-button button {
+.goal-amount {
+    font-size: 0.85rem;
+    color: #9ca3af;
+}
+
+.goal-bar-bg {
+    width: 100%;
+    height: 0.6rem;
+    background: #111827;
+    border-radius: 999px;
+    overflow: hidden;
+    border: 1px solid #1f2937;
+}
+
+.goal-bar-fill {
+    height: 100%;
     background: linear-gradient(135deg, #22c55e, #16a34a);
-    color: #022c22;
-    box-shadow: 0 12px 24px rgba(34, 197, 94, 0.45);
+    width: 0%;
+    transition: width 0.3s ease;
 }
 
-/* Couleurs pour le chart */
-.col-logement { background: #3b82f6; }
-.col-alimentation { background: #22c55e; }
-.col-transports { background: #f97316; }
-.col-loisirs { background: #f43f5e; }
-.col-autres { background: #64748b; }
-
-/* =======================   INSIGHT (carousel + pie)   ======================= */
-
-/* ---- Carousel ---- */
-.carousel-controls{
-  display: inline-flex;
-  gap: 0.5rem;
-  align-items: center;
+.goal-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 0.35rem;
+    font-size: 0.8rem;
+    color: #9ca3af;
 }
 
-.carousel-btn{
-  width: 42px;
-  height: 36px;
-  justify-content: center;
-  padding: 0;
-  border-radius: 999px;
+.goal-actions {
+    display: inline-flex;
+    gap: 0.5rem;
 }
 
-.carousel-viewport{
-  overflow: hidden;
-  margin-top: 0.8rem;
-  border-radius: 0.9rem;
-  border: 1px solid #111827;
-  background: #020617;
-}
-
-.carousel-track{
-  display: flex;
-  transition: transform 0.35s ease;
-}
-
-.carousel-slide{
-  min-width: 100%;
-  padding: 1rem 1rem 1.1rem;
-}
-
-.slide-title{
-  margin: 0 0 0.35rem;
-  font-size: 1.05rem;
-  font-weight: 800;
-  color: #e5e7eb;
-}
-
-.slide-text{
-  margin: 0;
-  color: #9ca3af;
-  line-height: 1.45;
-}
-
-.carousel-dots{
-  margin-top: 0.6rem;
-  display: flex;
-  gap: 0.4rem;
-}
-
-.carousel-dot{
-  width: 10px;
-  height: 10px;
-  border-radius: 999px;
-  border: 1px solid #1f2937;
-  background: rgba(148, 163, 184, 0.25);
-  cursor: pointer;
-}
-
-.carousel-dot.active{
-  background: rgba(34, 197, 94, 0.85);
-  border-color: rgba(34, 197, 94, 0.95);
-}
-
-/* ---- Pie + legend ---- */
-.pie-grid{
-  margin-top: 0.9rem;
-  display: grid;
-  grid-template-columns: 300px 1fr;
-  gap: 1.2rem;
-  align-items: center;
-}
-
-.pie-svg{
-  width: 260px;
-  height: 260px;
-  display: block;
-}
-
-.pie-legend{
-  padding: 0.75rem 0.9rem;
-  border-radius: 0.9rem;
-  border: 1px solid #1f2937;
-  background: #020617;
-}
-
-.legend-head{
-  display: flex;
-  justify-content: space-between;
-  font-size: 0.78rem;
-  color: #9ca3af;
-  margin-bottom: 0.55rem;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.04em;
-}
-
-.legend-row{
-  display: grid;
-  grid-template-columns: 1fr auto;
-  gap: 0.6rem;
-  align-items: center;
-  padding: 0.35rem 0;
-}
-
-.legend-left{
-  display: inline-flex;
-  align-items: center;
-  gap: 0.6rem;
-  color: #e5e7eb;
-  font-weight: 700;
-}
-
-.legend-dot{
-  width: 10px;
-  height: 10px;
-  border-radius: 999px;
-}
-
-.legend-pct{
-  font-variant-numeric: tabular-nums;
-  font-weight: 800;
-  color: #e5e7eb;
-}
-
-.pie-label{
-  font-size: 0.9rem;
-  font-weight: 800;
-  fill: rgba(255,255,255,0.92);
-  paint-order: stroke;
-  stroke: rgba(0,0,0,0.35);
-  stroke-width: 3px;
+.goal-actions .secondary {
+    padding: 0.35rem 0.8rem;
+    font-size: 0.8rem;
 }
 
 
-.pie-svg{
-  margin: 0 auto;
+/* =============================================================================
+   12. INSIGHT — CAROUSEL
+============================================================================= */
+
+.carousel-controls {
+    display: inline-flex;
+    gap: 0.5rem;
+    align-items: center;
+}
+
+.carousel-btn {
+    width: 42px;
+    height: 36px;
+    padding: 0;
+    border-radius: 999px;
+}
+
+.carousel-viewport {
+    overflow: hidden;
+    margin-top: 0.8rem;
+    border-radius: 0.9rem;
+    border: 1px solid #111827;
+    background: #020617;
+}
+
+.carousel-track {
+    display: flex;
+    transition: transform 0.35s ease;
+}
+
+.carousel-slide {
+    min-width: 100%;
+    padding: 1rem 1rem 1.1rem;
+}
+
+.slide-title {
+    margin: 0 0 0.35rem;
+    font-size: 1.05rem;
+    font-weight: 800;
+    color: #e5e7eb;
+}
+
+.slide-text {
+    margin: 0;
+    color: #9ca3af;
+    line-height: 1.45;
+}
+
+.carousel-dots {
+    margin-top: 0.6rem;
+    display: flex;
+    gap: 0.4rem;
+}
+
+.carousel-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 999px;
+    border: 1px solid #1f2937;
+    background: rgba(148, 163, 184, 0.25);
+    cursor: pointer;
+}
+
+.carousel-dot.active {
+    background: rgba(34, 197, 94, 0.85);
+    border-color: rgba(34, 197, 94, 0.95);
 }
 
 
-/* Responsive */
-@media (max-width: 900px){
-  .pie-grid{
-    grid-template-columns: 1fr;
-    justify-items: center;
-  }
-  .pie-legend{
-    width: 100%;
-  }
+/* =============================================================================
+   13. INSIGHT — PIE CHART
+============================================================================= */
+
+.pie-grid {
+    margin-top: 0.9rem;
+    display: grid;
+    grid-template-columns: 300px 1fr;
+    gap: 1.2rem;
+    align-items: center;
 }
 
-/* ======================   INSIGHT – Header compact   ====================== */
-
-.insight-header{
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-  padding: 0.75rem 0;
+.pie-svg {
+    width: 260px;
+    height: 260px;
+    display: block;
+    margin: 0 auto;
 }
 
-/* pousse les metrics à droite */
-.insight-vuGlobale{
-  margin-left: auto;
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 0.6rem;
+.pie-label {
+    font-size: 0.9rem;
+    font-weight: 800;
+    fill: rgba(255, 255, 255, 0.92);
+    paint-order: stroke;
+    stroke: rgba(0, 0, 0, 0.35);
+    stroke-width: 3px;
 }
 
-/* version compacte des cards */
-.vuGlobaleCard.compact{
-  padding: 0.55rem 0.75rem;
-  min-height: auto;
+.pie-legend {
+    padding: 0.75rem 0.9rem;
+    border-radius: 0.9rem;
+    border: 1px solid #1f2937;
+    background: #020617;
 }
 
-/* texte un peu plus petit pour le header */
-.vuGlobaleCard.compact .metric-label{
-  font-size: 0.7rem;
+.legend-head {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.78rem;
+    color: #9ca3af;
+    margin-bottom: 0.55rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
 }
 
-.vuGlobaleCard.compact .metric-value{
-  font-size: 1.05rem;
+.legend-row {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 0.6rem;
+    align-items: center;
+    padding: 0.35rem 0;
 }
 
-/* responsive : les métriques passent en dessous */
-@media (max-width: 900px){
-  .insight-header{
-    flex-wrap: wrap;
-  }
-
-  .insight-vuGlobale{
-    width: 100%;
-    margin-left: 0;
-    grid-template-columns: 1fr;
-  }
+.legend-left {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    color: #e5e7eb;
+    font-weight: 700;
 }
 
-
-/* ======================   INSIGHT – espace   ====================== */
-
-/* espace interne pour Infos */
-.card[aria-label="Insights"] .carousel-viewport {
-  padding: 0.75rem;
-}
-
-/* espace interne pour Répartition des dépenses */
-.card[aria-label="Répartition des dépenses"] .pie-grid {
-  padding: 0.75rem;
-}
-
-
-/* ======================   INSIGHT – spacing écran ====================== */
-
-/* espace entre le contenu INSIGHT et le bord de l'écran */
-body > .grid {
-  padding-left: 1rem;
-  padding-right: 1rem;
+.legend-pct {
+    font-variant-numeric: tabular-nums;
+    font-weight: 800;
+    color: #e5e7eb;
 }
 
 
-/* ======================   INSIGHT – header spacing écran   ====================== */
+/* =============================================================================
+   14. INSIGHT — HEADER COMPACT
+============================================================================= */
 
-.insight-header{
-  padding-left: 1rem;
-  padding-right: 1rem;
+.insight-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 0.75rem 1rem;
 }
 
-/* ======================   OBJECTIFS D'ÉPARGNE   ====================== */
-
-.goal-item{
-  border: 1px solid #1f2937;
-  border-radius: 0.75rem;
-  padding: 0.75rem;
-  margin-bottom: 0.6rem;
-  background: #020617;
-}
-
-.goal-header{
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 0.4rem;
-}
-
-.goal-name{
-  font-weight: 700;
-  color: #e5e7eb;
-}
-
-.goal-amount{
-  font-size: 0.85rem;
-  color: #9ca3af;
-}
-
-.goal-bar-bg{
-  width: 100%;
-  height: 0.6rem;
-  background: #111827;
-  border-radius: 999px;
-  overflow: hidden;
-  border: 1px solid #1f2937;
-}
-
-.goal-bar-fill{
-  height: 100%;
-  background: linear-gradient(135deg, #22c55e, #16a34a);
-  width: 0%;
-  transition: width 0.3s ease;
-}
-
-.goal-footer{
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-top: 0.35rem;
-  font-size: 0.8rem;
-  color: #9ca3af;
+.insight-vuGlobale {
+    margin-left: auto;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 0.6rem;
 }
 
 
-.goal-actions{
-  display: inline-flex;
-  gap: 0.5rem;
+/* =============================================================================
+   15. RESPONSIVE
+============================================================================= */
+
+@media (max-width: 900px) {
+    .grid {
+        grid-template-columns: 1fr;
+    }
+
+    .vuGlobale {
+        grid-template-columns: 1fr;
+        margin-left: 0;
+    }
+
+    .pie-grid {
+        grid-template-columns: 1fr;
+        justify-items: center;
+    }
+
+    .pie-legend {
+        width: 100%;
+    }
+
+    .insight-header {
+        flex-wrap: wrap;
+    }
+
+    .insight-vuGlobale {
+        width: 100%;
+        margin-left: 0;
+        grid-template-columns: 1fr;
+    }
 }
-.goal-actions .secondary{
-  padding: 0.35rem 0.8rem;
-  font-size: 0.8rem;
+
+@media (max-width: 600px) {
+    form {
+        grid-template-columns: 1fr;
+    }
 }
