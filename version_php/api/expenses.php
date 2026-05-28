@@ -3,7 +3,7 @@
 header("Content-Type: application/json");
 require __DIR__ . "/db.php";
 
-// On détecte la méthode PHP
+// On détecte la méthode HTML
 $method = $_SERVER["REQUEST_METHOD"];
 
 switch ($method) {
