@@ -60,6 +60,7 @@ function formatPct(p) {
   return p.toFixed(1).replace('.', ',') + ' %';
 }
 
+// Récupérer un tableau depuis le localStorage
 function loadArray(key) {
   const raw = localStorage.getItem(key);
   if (!raw) return [];
